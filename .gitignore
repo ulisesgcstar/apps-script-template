@@ -7,3 +7,6 @@
 # Ignorar archivos de Apps Script/Clasp
 .clasp.json
 .clasp.json.*
+
+# Ignorar carpeta de compilación de TypeScript
+/dist
