@@ -27,7 +27,22 @@ echo "Configurando Clasp para que use la carpeta 'dist/'..."
 # Lee el .clasp.json, cambia rootDir a dist, y guarda los cambios
 sed -i 's/"rootDir": ".*"/"rootDir": "dist"/g' .clasp.json
 
-# 4. Compilar código TypeScript inicial
+# 4. Mover código JS clonado (si existe) a src/ y renombrarlo a .ts
+if [ -f "Código.js" ]; then
+  echo "Detectado código existente ('Código.js'). Moviendo y renombrando a src/Código.ts."
+  mv Código.js src/Código.ts
+  # Eliminar el CODE.ts de la plantilla que está en blanco para evitar duplicidad.
+  rm -f src/CODE.ts
+fi
+
+# 5. Mover el archivo de manifiesto appsscript.json clonado a src/
+if [ -f "appsscript.json" ]; then
+  echo "Detectado manifiesto clonado ('appsscript.json'). Moviendo a src/."
+  mv appsscript.json src/
+fi
+
+
+# 6. Compilar código TypeScript inicial
 echo "Compilando código TypeScript inicial a JavaScript (dist/)..."
 npm run build
 
